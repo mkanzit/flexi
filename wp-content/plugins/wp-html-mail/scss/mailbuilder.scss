@@ -1,0 +1,307 @@
+@import "contenttype-text";
+@import "contenttype-twocol";
+
+
+$black:         #000;
+$dark-gray:     #23282d;
+$medium-gray:    #888;
+$light-gray:    #eee;
+$white:         #FFF;
+
+.clearfix {
+  zoom: 1;
+    &:before, &:after { content: ""; display: table; }
+    &:after { clear: both; }
+}
+
+
+/*************************************
+*   SUBJECT
+* ***********************************/
+.post-type-wphtmlmail_mail #subject{
+    width:100%;
+}
+
+/*************************************
+*   ADD BUTTON
+* ***********************************/
+.mb-add-wrap{
+    position: relative;
+
+    .mb-add{
+        width: 160px;
+        text-align: center;
+    } 
+}
+
+.mb-add-types{
+    width: 200px;
+    margin-top: 13px;
+    margin-left: 5px;
+    background: $dark-gray;
+    border-radius: 8px;
+    color: $light-gray;
+    position: absolute;
+    display: none;
+    bottom: 55px;
+    
+    &:after {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-width: 14px 12px 0;
+        border-color: $dark-gray transparent;
+        display: block;
+        width: 0;
+        z-index: 1;
+        margin-left: -14px;
+        bottom: -12px;
+        left: 50%;
+    }
+
+    li{
+        border-bottom: 1px solid rgba($white,0.2);
+
+        &:last-child{
+            border-bottom: none;
+        }
+
+        a{
+            display: block;
+            padding:5px 15px;
+            color: $light-gray;
+            text-decoration: none;
+            transition:all 0.4s;
+            &:hover{
+                color:$white;
+                background-color: rgba($white,0.2);
+            }
+
+            &.disabled{
+                color: $medium-gray;
+                cursor: not-allowed;
+                &:hover{
+                    color:$medium-gray;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}
+
+
+/*************************************
+*   CONTENT ELEMENTS
+* ***********************************/
+#mailbuilder-templates {
+    display: none;
+}
+
+.mb-contentelement{
+    width:100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    transition: all 0.4s;
+    box-shadow: 0 1px 3px 1px rgba(0,0,0,0.3);
+
+    .mb-title-bar{
+        background: $dark-gray;
+        color: $light-gray;
+        padding:5px 10px;
+        cursor: move;
+        position: relative;
+
+        .mb-remove-element{
+            opacity: 0;
+            position: absolute;
+            top:5px;
+            right: 5px;
+            text-decoration: none;
+            color: $light-gray;
+            &:hover{
+                color:#fff;
+            }
+        }
+    }
+
+    .mb-contentelement-content{
+        min-height:160px;
+        overflow: hidden;
+        background: $light-gray;
+        -webkit-box-shadow: inset 0px 0px 10px 5px rgba($black, 0.1);
+        -moz-box-shadow:    inset 0px 0px 10px 5px rgba($black, 0.1);
+        box-shadow:         inset 0px 0px 10px 5px rgba($black, 0.1);
+        cursor: pointer;
+        position: relative;
+
+        &:after{
+            position: absolute;
+            display: block;
+            opacity:0;
+            height: 100%;
+            width: 100%;
+            top:0;
+            left:0;
+            text-align: center;
+            background: rgba($black,0.3);
+            color: $light-gray;
+            content: "\f464";
+            font-family: dashicons;
+            font-size: 60px;
+            line-height: 2.7;
+            transition: all 0.4s;
+        }
+
+        &:hover{
+            &:after{
+                opacity: 1.0;
+            }
+        }
+    }
+
+    .mb-edit-wysiwyg{
+        textarea{
+            display: none;
+        }
+
+        .mb-content-preview{
+            opacity: 0.6;
+            padding:30px;
+        }
+    }
+
+    &:hover{
+        .mb-title-bar{
+            .mb-remove-element{
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+
+/*************************************
+*   MAILBUILDER
+* ***********************************/
+#mailbuilder{
+    .inside{
+        width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+/*************************************
+*   WYSIWYG EDITOR
+* ***********************************/
+#mb-wysiwyg-popup{
+    display: none;
+    position: fixed;
+    z-index: 20;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    margin:auto;
+    background: $light-gray;
+    padding:20px;
+    max-width: 700px;
+    height: 430px;
+
+    .mce-edit-area iframe{
+        min-height:250px;
+    }
+
+    .mb-popup-buttons{
+        margin: 20px;
+        text-align: center;
+        .dashicons{
+            vertical-align: -5px;
+        }
+    }
+}
+
+
+
+/*************************************
+*   RESET WORDPRESS STYLES IN PREVIEW
+* ***********************************/
+#poststuff #mailbuilder-content {
+    h2{
+        font-size: 18px;
+        padding: 0;
+    }
+}
+
+
+
+body.mb-overlay:after{
+    position: fixed;
+    display: block;
+    content:'';
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background: rgba($black,0.7);
+}
+
+
+/*************************************
+*   ATTACHMENTS
+* ***********************************/
+.upload_attachment_button{
+    .dashicons{
+        vertical-align: -5px;
+    }
+}
+
+.mb-attachment-preview{
+    margin: 15px 0;
+
+    img{
+        width: 24px;
+        height: auto;
+        float: left;
+    }
+
+    .mb-attachment-details{
+        position: relative;
+        margin-left: 35px;
+        padding-top: 6px;
+        line-height: 1.1;
+        padding-right: 25px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .filename{
+
+    }
+
+    .filesize{
+        font-size: 11px;
+    }
+
+    .remove-attachment{
+        position: absolute;
+        right: 0;
+        top:5px;
+        font-size: 14px;
+        text-decoration: none;
+    }
+}
+
+
+
+
+/*************************************
+*   WP SEO
+*   We don't need SEO settings for our emails!
+* ***********************************/
+#wpseo_edit_box{
+    display: none;
+}

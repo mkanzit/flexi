@@ -1,0 +1,48 @@
+.block-contact {
+  max-width: 720px;
+  margin: auto;
+
+  .form-item {
+    margin-bottom: 20px;
+
+    span[role="alert"] { display: none; }
+  }
+
+  .form-action {
+    .btn {
+      padding: 10px 30px;
+      height: auto;
+      text-align: center;
+      width: 200px;
+
+      @media #{$phone} {
+        width: 100%;
+      }
+    }
+  }
+
+  .wpcf7-response-output {
+    border: 2px solid $skin-error-red;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .valid {
+    input,
+    select,
+    textarea {
+      &[aria-invalid="false"] {
+        border: 1px solid $skin-success-green !important;
+      }
+    }
+  }
+  .invalid {
+    input,
+    select,
+    textarea {
+      &[aria-invalid="true"] {
+        border: 1px solid $skin-error-red !important;
+      }
+    }
+  }
+}

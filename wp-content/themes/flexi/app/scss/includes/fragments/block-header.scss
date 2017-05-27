@@ -1,0 +1,393 @@
+.site-header {
+
+  .hero-zone-featured-image { font-size: 0; }
+
+  .header-top {
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: $xsfade;
+    width: 100%;
+    z-index: 3;
+
+    &.off-canvas {
+      top: -30rem;
+    }
+
+    .open-search {
+      background: url('../images/icons/icon-search.png') center no-repeat;
+      background-size: 100%;
+      cursor: pointer;
+      display: inline-block;
+      height: 100%;
+      margin-left: 20px;
+      width: 20px;
+      vertical-align: middle;
+
+      @media #{$tablet} {
+        height: 20px;
+        margin-left: 0;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+    }
+
+    .site-branding {
+      background: $skin-white;
+      box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+      padding: 3.4rem 0;
+      position: relative;
+      text-align: right;
+      width: 21%;
+      z-index: 99;
+
+
+      &::after {
+        border-style: solid;
+        border-width: 145px 70px 0 0;
+        border-color: $skin-white transparent transparent transparent;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        width: 0;
+      }
+
+      @media screen and (max-width: 1100px) {
+        width: 150px;
+      }
+
+      @media #{$tablet} {
+        box-shadow: none;
+        padding: 1rem;
+        text-align: left;
+
+        &::after { display: none; }
+
+        img { height: 50px; }
+      }
+    }
+
+    .main-navigation {
+      background: $skin-white;
+      box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+      height: 64px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 71%;
+      z-index: 3;
+
+      &::after {
+        border-style: solid;
+        border-width: 0 0 64px 32px;
+        border-color: transparent transparent $skin-white transparent;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 100%;
+        top: 0;
+        width: 0;
+      }
+
+      .menu {
+        background: $skin-white;
+        height: 64px;
+        margin: 0;
+
+        @media #{$tablet} {
+          height: auto;
+        }
+
+        &-item {
+          float: left;
+
+          @media #{$tablet} {
+            float: none;
+            border-top: 1px solid $skin-black;
+
+            &:last-child {
+              border-bottom: 1px solid $skin-black;
+            }
+          }
+
+          &:hover {
+            .sub-menu {
+              top: 100%;
+            }
+          }
+
+          a {
+            color: $skin-black;
+            display: block;
+            font-family: $roboto-medium;
+            font-size: 14px;
+            padding: 2.1rem 1.5rem;
+            text-transform: uppercase;
+
+            @media #{$tablet} {
+              text-align: center;
+            }
+
+            &:hover,
+            &:active {
+              color: $skin-main-blue;
+              text-decoration: underline;
+            }
+          }
+
+          &-has-children {
+            .sub-menu {
+              background: $skin-main-blue-alpha;
+              right: 0;
+              padding: 80px 26% 30px;
+              position: absolute;
+              top: -200vh;
+              transition: $sfade;
+              width: 100vw;
+              z-index: -1;
+
+              @media #{$tablet} {
+                display: none;
+                padding: 0;
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+              }
+
+              &::after {
+                background: $skin-main-blue-alpha;
+                bottom: 100%;
+                content: '';
+                display: block;
+                height: 100%;
+                position: absolute;
+                width: 100%;
+              }
+
+              .menu-item {
+                width: 50%;
+
+                @media #{$tablet} {
+                  width: 100%;
+                  border-top: 0;
+
+                  &:not(:last-child) {
+                    border-bottom: 1px solid $skin-white;
+                  }
+                }
+
+                a {
+                  color: $skin-white;
+                  font-size: 15px;
+                  margin: 0;
+                  padding: 10px;
+
+                  @media #{$tablet} {
+                    text-align: center;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 1100px) {
+        width: 79%;
+      }
+
+      @media #{$tablet} {
+        display: none;
+        box-shadow: none;
+        height: auto;
+        top: 100%;
+        transform: none;
+        width: 100%;
+
+        &::after { display: none; }
+
+        .menu {
+          &-item {
+            width: 100%;
+
+            &-has-children {
+              .sub-menu {
+                background: $skin-main-blue;
+                right: auto;
+                position: relative;
+                top: auto;
+                width: 100%;
+                z-index: 0;
+
+                &::after {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .menu-ext {
+      @media #{$tablet} {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    }
+
+    @media #{$tablet} {
+      background: $skin-white;
+      box-shadow: 0 0 20px $skin-black;
+    }
+  }
+
+  .single-page-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    .page-title {
+      font-size: 48px;
+      color: $skin-white;
+      text-transform: uppercase;
+    }
+  }
+
+  .fixed-links {
+    position: fixed;
+    top: 200px;
+    right: 0;
+    z-index: 3;
+
+    @media #{$tablet} {
+      top: 150px;
+    }
+
+    .menu-quicklinks {
+      .menu-item {
+        position: relative;
+        right: -80px;
+        transition: $sfade;
+        width: 120px;
+
+        &:hover {
+          right: 0;
+        }
+
+        a {
+          background: $skin-link-color;
+          color: $skin-white;
+          display: inline-block;
+          margin-bottom: 2px;
+          padding: 8px 5px 8px 40px;
+          width: 100%;
+        }
+
+        &.contact-link {
+          a {
+            background: $skin-link-color url('../images/icons/icon-contact.png') left 3px center no-repeat;
+            background-size: 34px;
+          }
+        }
+
+        &.sites-link {
+          a {
+            background: $skin-link-color url('../images/icons/icon-sites.png') left 7px center no-repeat;
+            background-size: 26px;
+          }
+        }
+      }
+    }
+  }
+
+  .search-area {
+    background: $skin-main-blue-alpha;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 44;
+
+    .close-search {
+      background: url('../images/icons/btn-close.png') center no-repeat;
+      background-size: 100%;
+      cursor: pointer;
+      display: block;
+      height: 30px;
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      width: 30px;
+    }
+
+    .search-form {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      @media #{$tablet} {
+        width: 60%;
+      }
+
+      .form-item,
+      .form-action {
+        float: left;
+      }
+
+      .form-item {
+        margin-right: 3px;
+
+        .search-field {
+          width: 300px;
+        }
+
+        @media #{$phone} {
+          margin-right: 0;
+          width: 100%;
+
+          .search-field { width: 100%; }
+        }
+      }
+
+      .form-action {
+        @media #{$phone} {
+          margin-top: 10px;
+          width: 100%;
+
+          .btn { width: 100%; }
+        }
+      }
+    }
+  }
+
+  .lang-menu {
+    display: inline-block;
+    margin-left: 20px;
+
+    .lang-item {
+      a {
+        background: $skin-light-gray;
+        color: $skin-main-blue;
+        padding: 5px 10px;
+        transition: $fade;
+
+        &:hover {
+          background: $skin-soft-gray;
+        }
+      }
+    }
+  }
+}

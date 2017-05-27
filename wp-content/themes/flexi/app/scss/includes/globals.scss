@@ -1,0 +1,178 @@
+html { font-size: 10px; }
+
+body {
+  color: $skin-black;
+  font-family: $roboto-regular;
+  font-weight: 400;
+  font-size: 1.6rem;
+
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media #{$tablet} {
+    padding-top: 70px;
+  }
+}
+
+.container  {
+  margin: auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Headlines */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: $roboto-bold;
+  margin-bottom: 2rem;
+}
+
+section h1,
+.section-title {
+  font-size: 3.4rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-title {
+  margin: 20px 0;
+}
+
+.block-title {
+  color: $skin-black;
+  margin-top: 10px;
+
+  .search-everything-highlight-color {
+    background-color: transparent !important;
+    color: $skin-black;
+  }
+}
+
+/* Columns */
+.col-xs-12 {
+  @media #{$phone} {
+    margin-bottom: 30px;
+  }
+}
+
+/* Links */
+a {
+  color: $skin-link-color;
+  text-decoration: none;
+  transition: $fade;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $skin-link-color;
+    text-decoration: none;
+  }
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  border: 1px solid $skin-soft-gray;
+  box-shadow: none;
+  transition: $fade;
+  width: 100%;
+}
+
+input,
+select {
+  height: 40px;
+  padding: 0 10px;
+}
+
+textarea {
+  padding: 10px;
+  resize: none;
+}
+
+/* Buttons */
+.btn {
+  background: $skin-black;
+  border: 2px solid $skin-black;
+  border-radius: 0;
+  color: $skin-white;
+  display: inline-block;
+  height: 40px;
+  line-height: 26px;
+  text-transform: uppercase;
+  transition: $fade;
+  width: auto;
+
+  &-default {
+    border-color: $skin-link-color;
+    background: $skin-link-color;
+
+    &:hover {
+      background: transparent;
+      border-color: $skin-link-color;
+      color: $skin-link-color;
+    }
+  }
+
+  &-submit {
+    border-color: $skin-white;
+    background: $skin-white;
+    color: $skin-black;
+
+    &:hover {
+      background: transparent;
+      color: $skin-white;
+    }
+  }
+}
+
+/* Medias */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.block-page-section {
+  img {
+    width: 100%;
+  }
+}
+
+
+/* Tricks */
+#top-link-block.affix {
+  position: fixed;
+  bottom: 18px;
+  right: 10px;
+
+  a {
+    background: $skin-main-blue;
+    border: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: none;
+    transition: $fade;
+
+    &:hover {
+      border: 1px solid $skin-white;
+    }
+  }
+
+  .glyphicon {
+    color: $skin-white;
+    font-family: $bootstrap;
+  }
+}
+
+#top-link-block.affix-top {
+  position: absolute;
+  bottom: -82px;
+  right: 10px;
+}

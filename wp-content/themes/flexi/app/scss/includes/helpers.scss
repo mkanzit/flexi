@@ -1,0 +1,39 @@
+.txt-left { text-align: left; }
+.txt-right { text-align: right; }
+
+.container {
+  margin: auto;
+  max-width: 1200px;
+  padding: 0 15px;
+  width: 100%;
+}
+
+.block-spaced { padding: 4rem 0; }
+
+
+/* Display */
+.hide {
+  display: none;
+}
+
+.mobile-only {
+  display: none;
+
+  @media #{$tablet} {
+    display: block !important;
+  }
+}
+
+.desktop-only {
+  @media #{$tablet} {
+    display: none !important;
+  }
+}
+
+
+/* Flex */
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+

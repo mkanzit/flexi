@@ -1,0 +1,66 @@
+.hamburger {
+  margin: 100px;
+  width: 33px;
+  height: 27px;
+  position: relative;
+  transition: all .3s linear; }
+  .hamburger > div {
+    width: 100%;
+    height: 3px;
+    background: #666;
+    position: absolute; }
+    .hamburger > div:before {
+      position: absolute;
+      background: inherit;
+      content: "";
+      width: 3px;
+      height: 3px;
+      top: 0px;
+      left: -1.5px;
+      border: 1px solid #666;
+      border-radius: 50%; }
+    .hamburger > div:after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      width: 3px;
+      height: 3px;
+      top: 0px;
+      right: -1.5px;
+      border: 1px solid #666;
+      border-radius: 50%; }
+  .hamburger .pipe1 {
+    top: 0; }
+  .hamburger .pipe2 {
+    top: 12px;
+    opacity: 1;
+    transition: all 0.4s ease-out; }
+  .hamburger .pipe3 {
+    top: 24px; }
+  .hamburger .pipe1, .hamburger .pipe3 {
+    transition: -webkit-transform 0.6s linear;
+    transition: transform 0.6s linear;
+    transition: transform 0.6s linear, -webkit-transform 0.6s linear; }
+  .hamburger.clicked {
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transition: all .3s linear; }
+    .hamburger.clicked .pipe1, .hamburger.clicked .pipe3 {
+      position: absolute;
+      margin: 0;
+      top: 12px;
+      transition: -webkit-transform 0.6s linear .3s;
+      transition: transform 0.6s linear .3s;
+      transition: transform 0.6s linear .3s, -webkit-transform 0.6s linear .3s; }
+    .hamburger.clicked .pipe2 {
+      opacity: 0;
+      transition: all 0.4s ease-in .3s; }
+    .hamburger.clicked .pipe1 {
+      -webkit-transform: rotate(-405deg);
+      -ms-transform: rotate(-405deg);
+      transform: rotate(-405deg); }
+    .hamburger.clicked .pipe3 {
+      -webkit-transform: rotate(-315deg);
+      -ms-transform: rotate(-315deg);
+      transform: rotate(-315deg); }

@@ -1,0 +1,20 @@
+.block-page-section {
+  .gallery-container {
+    white-space: nowrap;
+
+    .block-teaser {
+      display: inline-block;
+      max-width: 300px;
+      width: 100%;
+      margin-right: 30px;
+      white-space: normal;
+      vertical-align: top;
+
+      .vid { margin-bottom: 20px; }
+
+      .desc {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+// Global configs
+@import 'includes/configs/fonts';
+@import 'includes/configs/vars';
+@import 'includes/configs/colors';
+
+// Global styles
+@import 'includes/helpers';
+@import 'includes/globals';
+
+// Fragment-based styles
+@import 'includes/fragments/block-header';
+@import 'includes/fragments/menu-burger';
+@import 'includes/fragments/block-page-introduction';
+@import 'includes/fragments/block-contact-us';
+@import 'includes/fragments/block-theme';
+@import 'includes/fragments/block-contact';
+@import 'includes/fragments/page-section';
+@import 'includes/fragments/block-footer';

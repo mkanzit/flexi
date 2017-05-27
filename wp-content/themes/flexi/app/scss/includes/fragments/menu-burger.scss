@@ -1,0 +1,89 @@
+$hamburger-width: 33px;
+$hamburger-height: 27px;
+$pipe-height: 3px;
+$pipe-color: $skin-black;
+
+.hamburger {
+  margin: 0;
+  display: inline-block;
+  width: $hamburger-width;
+  height: $hamburger-height;
+  position: relative;
+  transition: all .3s linear;
+  vertical-align: middle;
+
+  & > div {
+  width: 100%;
+  height: $pipe-height;
+  background: $pipe-color;
+  position: absolute;
+
+    &:before {
+      position: absolute;
+      background: inherit;
+      content: "";
+      width: $pipe-height;
+      height: $pipe-height;
+      top: 0px;
+      left: -($pipe-height / 2);
+      border: 1px solid $pipe-color;
+      border-radius: 50%;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      width: $pipe-height;
+      height: $pipe-height;
+      top: 0px;
+      right: -($pipe-height / 2);
+      border: 1px solid $pipe-color;
+      border-radius: 50%;
+    }
+  }
+
+  .pipe1 {
+    top: 0;
+  }
+
+  .pipe2 {
+    top: $pipe-height + ($hamburger-height / 3);
+    opacity: 1;
+    transition: all 0.4s ease-out;
+  }
+
+  .pipe3 {
+    top: (($pipe-height) + ($hamburger-height / 3)) * 2;
+  }
+
+  .pipe1, .pipe3 {
+    transition: transform 0.6s linear;
+  }
+
+  &.clicked {
+
+    transform: rotate(-90deg);
+    transition: all .3s linear;
+
+    .pipe1, .pipe3 {
+      position: absolute;
+      margin: 0;
+      top: (($hamburger-height / 2) - ($pipe-height / 2));
+      transition: transform 0.6s linear .3s;
+    }
+
+    .pipe2 {
+      opacity: 0;
+      transition: all 0.4s ease-in .3s;
+    }
+
+    .pipe1 {
+      transform: rotate(-45deg * 9);
+    }
+
+    .pipe3 {
+      transform: rotate(-45deg * 7);
+    }
+  }
+}

@@ -1,0 +1,20 @@
+/* fonts */
+$roboto-light: 'robotolight', sans-serif;
+$roboto-regular: 'robotoregular', sans-serif;
+$roboto-medium: 'robotomedium', sans-serif;
+$roboto-bold: 'robotobold', sans-serif;
+$roboto-black: 'robotoblack', sans-serif;
+$bootstrap: 'bootstrap';
+
+
+/* Animations */
+$fade: all .2s ease-in-out;
+$sfade: all .5s ease-in-out;
+$xsfade: all 1s ease-in-out;
+
+
+/* Breakpoints */
+$phone: 'screen and (max-width: 640px)';
+$phablet: 'screen and (max-width: 768px)';
+$tablet: 'screen and (max-width: 1024px)';
+$desktop: 'screen and (min-width: 1024px)';

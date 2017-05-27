@@ -1,0 +1,141 @@
+.site-footer {
+  .bottom-menus {
+    background: $skin-main-blue;
+    padding: 3rem 0;
+    margin-top: 4rem;
+
+    .menu-footer-menu-container {
+      .menu {
+        > .menu-item {
+          > a {
+            cursor: text;
+            color: $skin-white;
+            display: block;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+
+            @media #{$phone} {
+              text-align: center;
+            }
+          }
+
+          .sub-menu {
+            a {
+              color: $skin-white;
+              font-size: 14px;
+              font-weight: 400;
+
+              &:hover {
+                color: $skin-link-color;
+              }
+
+              @media #{$phone} {
+                display: block;
+                text-align: center;
+              }
+            }
+          }
+
+          @media #{$phone} {
+            margin-bottom: 40px;
+          }
+        }
+      }
+    }
+
+    hr {
+      border: 0;
+      background: $skin-white-alpha;
+      height: 1px;
+    }
+
+    .menu-links-container {
+      // padding: 2rem 0;
+
+      .menu {
+        margin: auto;
+        max-width: 720px;
+        width: 100%;
+
+        &-item {
+          a {
+            color: $skin-white;
+            display: block;
+            font-size: 14px;
+            text-align: center;
+
+          }
+
+          @media #{$phone} {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-notice {
+    background: $skin-light-gray;
+    padding: 3rem 0;
+
+    p {
+      margin: auto;
+      max-width: 720px;
+      width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .footer-links {
+    padding: 2.8rem 0;
+  }
+
+  .menu {
+    margin: 0;
+
+    &-contact,
+    &-legal {
+      margin: auto;
+      max-width: 720px;
+      width: 100%;
+
+      .menu-item {
+        a {
+          color: $skin-black;
+          display: block;
+          text-align: center;
+
+          &:hover {
+            color: $skin-link-color;
+          }
+
+          @media #{$phone} {
+            padding: 10px 0;
+          }
+        }
+
+        @media #{$phone} {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &-contact {
+      .menu-item {
+        a {
+          color: $skin-white;
+        }
+
+        @media #{$phone} {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+

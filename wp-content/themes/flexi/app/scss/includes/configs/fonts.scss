@@ -1,0 +1,58 @@
+$root: '../fonts';
+
+@font-face {
+    font-family: 'robotoblack';
+    src: url('#{$root}/roboto-black-webfont.woff2') format('woff2'),
+         url('#{$root}/roboto-black-webfont.woff') format('woff'),
+         url('#{$root}/roboto-black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotobold';
+    src: url('#{$root}/roboto-bold-webfont.woff2') format('woff2'),
+         url('#{$root}/roboto-bold-webfont.woff') format('woff'),
+         url('#{$root}/roboto-bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotolight';
+    src: url('#{$root}/roboto-light-webfont.woff2') format('woff2'),
+         url('#{$root}/roboto-light-webfont.woff') format('woff'),
+         url('#{$root}/roboto-light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotomedium';
+    src: url('#{$root}/roboto-medium-webfont.woff2') format('woff2'),
+         url('#{$root}/roboto-medium-webfont.woff') format('woff'),
+         url('#{$root}/roboto-medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'robotoregular';
+    src: url('#{$root}/roboto-regular-webfont.woff2') format('woff2'),
+         url('#{$root}/roboto-regular-webfont.woff') format('woff'),
+         url('#{$root}/roboto-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Bootstrap fonts */
+@font-face {
+    font-family: 'bootstrap';
+    src: url('#{$root}/bootstrap/glyphicons-halflings-regular.eot') format('eot'),
+         url('#{$root}/bootstrap/glyphicons-halflings-regular.svg') format('svg'),
+         url('#{$root}/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'),
+         url('#{$root}/bootstrap/glyphicons-halflings-regular.woff') format('woff'),
+         url('#{$root}/bootstrap/glyphicons-halflings-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
