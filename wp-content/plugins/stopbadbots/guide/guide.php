@@ -4,7 +4,6 @@
  * @author William Sergio Minossi
  * @copyright 2016
  */
-
 $ah_help = '<p style="font-family:arial; font-size:16px;">';
 $ah_help .= '1) '.__('Open the General Settings Tab and click over Yes  (to begin to block).','stopbadbots');
 $ah_help .= '<br>';

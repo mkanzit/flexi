@@ -3,7 +3,7 @@
 Plugin Name: StopBadBots 
 Plugin URI: http://stopbadbots.com
 Description: The easiest way to stop bad bots.
-Version: 3.3
+Version: 3.4
 Text Domain: stopbadbots
 Domain Path: /language
 Author: Bill Minozzi
@@ -34,9 +34,9 @@ DEALINGS IN THE SOFTWARE.
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
 
-// ob_start();
+ // ob_start();
     
-define('STOPBADBOTSVERSION', '3.3' );
+define('STOPBADBOTSVERSION', '3.4' );
 define('STOPBADBOTSPATH', plugin_dir_path(__file__) );
 define('STOPBADBOTSURL', plugin_dir_url(__file__));
 define('STOPBADBOTSDOMAIN', get_site_url() );
@@ -106,9 +106,7 @@ add_filter('set-screen-option', 'stopbadbots_set_screen_options', 10, 3);
 $userAgentOri = sbb_get_ua();
 $userAgent = strtolower(trim(strtolower($userAgentOri)));
 
-
-//   $userAgent = 'Acoon';
-
+ //  $userAgent = 'Acoon';
 
 $stop_bad_bots_active = get_option('stop_bad_bots_active','yes');
 $stopbadbots_my_radio_report_all_visits = get_option('stopbadbots_my_radio_report_all_visits','yes');
@@ -145,15 +143,15 @@ function sbb_render_list_page() {
 }
 
 register_activation_hook( __FILE__, 'sbb_plugin_was_activated');
-add_action( 'plugins_loaded', 'sbb_plugin_db_update' );
 
 if($stopbadbots_version < STOPBADBOTSVERSION)
 { 
     
+   sbb_create_db();
    sbb_upgrade_db();
    check_db_sbb_blacklist();
-   sbb_mergetables();
-   sbb_plugin_db_update();
+   sbb_fill_db_froma();
+   
    //Default yes
    if(get_option('stop_bad_bots_network','') == '')
        add_option('stop_bad_bots_network', 'yes');
@@ -173,4 +171,6 @@ function stopbadbots_load_feedback()
     } 
 }
 add_action( 'wp_loaded', 'stopbadbots_load_feedback' );
+//$buffer = ob_get_flush();
+//mail('x', 'My Subject', $buffer); 
 ?>

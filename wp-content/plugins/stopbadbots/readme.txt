@@ -4,7 +4,7 @@ Donate link: http://stopbadbots.com/donate/
 Tags: block bot, block bots, block bad bots, stop bot, stop bots, bot, bots, bad, stop bad bots
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 3.3
+Stable tag: 3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,8 @@ Where is the demo video?
 2. Default Bot Table
 
 == Changelog ==
+3.4 2017-05-30 -  Improved memory usage and replaced around 300 inactive bots with new actives.
+
 3.3 2017-05-05 -  Help text Improvements.
 
 3.2 2017-05-04 -  Help Improvements.

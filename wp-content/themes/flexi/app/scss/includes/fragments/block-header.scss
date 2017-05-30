@@ -166,6 +166,7 @@
                 content: '';
                 display: block;
                 height: 100%;
+                left: 0;
                 position: absolute;
                 width: 100%;
               }
@@ -376,6 +377,11 @@
   .lang-menu {
     display: inline-block;
     margin-left: 20px;
+
+    @media #{$tablet} {
+      margin-left: auto;
+      margin-right: 20px;
+    }
 
     .lang-item {
       a {

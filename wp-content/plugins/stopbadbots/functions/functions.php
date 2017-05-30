@@ -145,37 +145,70 @@ function sbb_plugin_was_activated()
         add_option( 'stopbadbots_installed', time() );
         update_option( 'stopbadbots_installed', time() );
      }
-    require_once (STOPBADBOTSPATH . "functions/aBots.php");
+    // require_once (STOPBADBOTSPATH . "functions/aBots.php");
     sbb_create_db();
     sbb_fill_db_froma($wp_sbb_blacklist);
     sbb_upgrade_db();
 }
-function sbb_fill_db_froma($wp_sbb_blacklist)
+function sbb_fill_db_froma()
 {
-    global $wpdb;
+    global $wpdb, $wp_filesystem;
     $table_name = $wpdb->prefix . "sbb_blacklist";
     $charset_collate = $wpdb->get_charset_collate();
-    $z = count($wp_sbb_blacklist);
-    for ($i = 0; $i < $z; $i++) {
-        $a = $wp_sbb_blacklist[$i];
-        $botnickname = trim($a['botnickname']);
-        $botname = trim($a['botname']);
-        $boturl = trim($a['boturl']);
-        $results9 = $wpdb->get_results("SELECT * FROM $table_name where botnickname = '$botnickname' limit 1");
-        if (count($results9) > 0 or empty($botnickname))
-            continue;
-$query = "INSERT INTO ".$table_name.
-         " (botnickname, botname, boturl, botstate)
-          VALUES ('"
-         .$botnickname.
-         "', '".
-         $botname .
-         "', '"
-         .$boturl .
-         "', 'Enabled')";
-    $r = $wpdb->get_results($query);            
-    }
-}
+    $botsfile = STOPBADBOTSPATH . 'assets/bots.txt';
+    $botshandle = @fopen($botsfile, "r");
+
+    if ($botshandle) {
+        $delete = "delete from ".$table_name." WHERE botblocked < 1";
+        $wpdb->query($delete);  
+        
+        while (($botsbuffer = fgets($botshandle, 4096)) !== false) {
+           
+             $asplit = explode(',', $botsbuffer);
+             
+             
+             if(count($asplit) < 3)
+               continue;
+               
+             $botnickname = trim($asplit['0']);
+             $botname = trim($asplit['1']);
+             $newbotflag = trim($asplit['2']);
+             
+             if($newbotflag == 'C')
+                 $botflag = '6';
+             else
+                 $botflag = '3';
+                 
+            
+             $results9 = $wpdb->get_results("SELECT * FROM $table_name where botnickname = '$botnickname' limit 1");
+             if (count($results9) > 0 or empty($botnickname))
+                continue;    
+
+             $query = "INSERT INTO ".$table_name.
+                 " (botnickname, botname, botstate, botflag)
+                  VALUES ('"
+                 .$botnickname.
+                 "', '".
+                 $botname .
+                 "', 
+                 'Enabled', '"
+                 .$botflag . "')";
+             $r = $wpdb->get_results($query); 
+             
+      } // End Loop   
+        
+        
+          if (!feof($botshandle)) {
+            // echo "Error: unexpected fgets() fail\n";
+            return false;
+          }
+          
+    } // end open
+    
+    
+    fclose($botshandle);
+    
+} // end Function
 
 function sbb_create_db()
 {
@@ -202,27 +235,6 @@ function sbb_create_db()
     // KEY `botnickname` (`botnickname`)
     dbDelta($sql);
 }
-function sbb_plugin_db_update()
-{
-    global $wp_sbb_blacklist, $wpdb;
-    require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
-    require_once (STOPBADBOTSPATH . "functions/aBots.php");
-    $z = count($wp_sbb_blacklist);
-    $table_name = $wpdb->prefix . "sbb_blacklist";
-
-    if(! stopbadbots_tablexist($table_name))
-       return;
-       
-    $results9 = $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
-    
-    if ($results9 >= $z)
-        return;
-        
-    sbb_create_db();
-    sbb_fill_db_froma($wp_sbb_blacklist);
-}
-
-
 
 
 function sbb_upgrade_db()
@@ -231,6 +243,8 @@ function sbb_upgrade_db()
     require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
     $table_name = $wpdb->prefix . "sbb_blacklist";
 
+    if(! stopbadbots_tablexist($table_name))
+       return;
 
     $query = "SHOW COLUMNS FROM " . $table_name . " LIKE 'botblocked'";
  
@@ -432,7 +446,7 @@ function upload_new_bots()
 {
      Global $wpdb;   
      $table_name = $wpdb->prefix . "sbb_blacklist";
-     $query = 'select * from '.$table_name. ' where botflag =  "2"';
+     $query = 'select * from '.$table_name. ' where botflag = "2" or botflag = "1" ';
      $result = $wpdb->get_row($query);
      if(! $result)
        return;
@@ -467,7 +481,12 @@ function upload_new_bots()
                         }
                         else
                         {
-                             $query = 'update '.$table_name. ' set botflag =  "3" WHERE id ='.$id;
+                             $botflag = '4';
+                             
+                             if( !empty($ua) and !empty($ip))
+                                $botglag = '6';
+                                
+                             $query = "update ".$table_name. " set botflag = '".$botflag."' WHERE id ='".$id."'";
                              $result = $wpdb->query($query);
                         }
 }
@@ -494,22 +513,40 @@ function sbb_complete_bot_data($nickname)
    if(empty($nickname))
      return;
      $table_name = $wpdb->prefix . "sbb_blacklist";
-     $query = 'select * from '.$table_name. ' where botnickname =  "'.$nickname.'" and botflag <> "9" limit 1';
+     $query = 'select * from '.$table_name. ' where botnickname =  "'.$nickname.'" and botflag <> "6" limit 1';
      $result = $wpdb->get_row($query);
      if(!$result)
        return;
+       
      $id = $result->id;
-     $ua = strip_tags(trim($result->botua));
-     $ua = sbb_clear_extra($ua);
+     $uadb = $result->botua;
+     $ipdb = $result->botip;
      
-     $ip = trim($result->botip);
-     if ( empty($ua) or empty($ip))
+     if ( empty($uadb) and empty($ipdb))
      {}
      else
        return;
+       
+
      $ua = sbb_get_ua();
-     $ua = json_encode($ua);
      $ip = sbb_findip();
+         
+     
+     $maybe = false;
+     if( empty($uadb) and !empty($ua))
+       $maybe = true;
+       
+     
+     if(empty($ipdb) and !empty($ip))
+       $maybe = true;
+       
+     if($maybe)
+       {}
+     else
+        return;
+ 
+     $ua = json_encode($ua);       
+       
      $sql = "update ".$table_name." SET 
      botua = '".$ua."',
      botip = '".$ip."',
@@ -519,25 +556,6 @@ function sbb_complete_bot_data($nickname)
      limit 1";
      $result = $wpdb->query($sql);
      return;
-}
-function sbb_mergetables()
-{
-    Global $wpdb; 
-    $stopbadbots_my_blacklist = trim(get_site_option('stopbadbots_my_blacklist', ''));
-    if (empty($stopbadbots_my_blacklist))
-        return;
-    $stopbadbots_my_blacklist = explode(PHP_EOL, $stopbadbots_my_blacklist);
-    $q = count($stopbadbots_my_blacklist);
-    $table_name = $wpdb->prefix . "sbb_blacklist";
-    $crawlers_agents = '';
-    for ($i = 0; $i < $q; $i++) {
-        $nickname = trim($stopbadbots_my_blacklist[$i]);
-        if( empty ($nickname))
-            continue;
-        $query = "INSERT INTO $table_name (botnickname,botname,botstate,botflag,botdate) VALUES ('$nickname','$nickname','Enabled', '1' , now())";
-        $r =  $wpdb->query($query);
-    }
-         update_option( 'stopbadbots_my_blacklist', '' );
 }
 
 
@@ -560,9 +578,15 @@ function sbb_chk_update()
         // 3 days
         return;
     }
-    
     ob_start();
 
+
+    $myarray = array(
+    'last_checked' => $last_checked,
+    'version' => STOPBADBOTSVERSION,
+    );
+    
+    
     $url = "http://stopbadbots.com/api/httpapi.php";
     //$bot_nickname = 'test';
     $response = wp_remote_post($url, array(
@@ -572,7 +596,7 @@ function sbb_chk_update()
         'httpversion' => '1.0',
         'blocking' => true,
         'headers' => array(),
-        'body' => array('last_checked' => $last_checked),
+        'body' => $myarray,
         'cookies' => array()));
 
 
@@ -639,36 +663,25 @@ function sbbcrawlerDetect($userAgent)
       return false;
     
     $current_table = $wpdb->prefix . 'sbb_blacklist';
-    $results = $wpdb->get_results("SELECT * FROM $current_table WHERE `botstate` LIKE 'Enabled' ");
-    $data = array();
-    $i = 0;
-    $crawlers_agents = '';
-    foreach ($results as $querydatum) {
-        array_push($data, (array )$querydatum);
-        $data[$i]['botnickname'] = strtolower(trim($data[$i]['botnickname']));
-        $data[$i]['botnickname'] = str_replace('|', '', $data[$i]['botnickname']);
-        if (strlen($data[$i]['botnickname']) > 2) {
-            if (!empty($crawlers_agents))
-                $crawlers_agents .= '|';
-            $crawlers_agents .= $data[$i]['botnickname'];
+    $result = $wpdb->get_results("SELECT botnickname, id FROM $current_table WHERE `botstate` LIKE 'Enabled' ");
+    
+    $sbb_found = ''; 
+        
+    foreach( $result as $results ) {
+        
+       $botnickname = trim($results->botnickname);
+       
+        if (strlen($botnickname) < 3)
+            continue;
+        if (stripos($userAgent, $botnickname) !== false)
+              $sbb_found = $botnickname;
         }
-        $i++;
-    }
-    if (empty($crawlers_agents))
-        return false;
-        
-        
-    @preg_match("/$crawlers_agents/i", $userAgent, $matches);
-    if (isset($matches[0]))
-        $sbb_found = trim($matches[0]);
-    else
-        $sbb_found = '';
- 
+    
        
     if (! empty($sbb_found))
-        return true;
+         return true;
         
-////////// / New        
+    ////////// / New        
         
         
     // not found
@@ -700,6 +713,7 @@ function sbbcrawlerDetect($userAgent)
 
     // else have bot at ua
 
+
     $agentsok = array(
         'googlebot',
         'adsbot-google',
@@ -708,6 +722,7 @@ function sbbcrawlerDetect($userAgent)
         'msnbot',
         'bingbot',
         'baidu',
+        'CUBOT_NOTE',
         'yandex',
         'Seznam',
         'Voila',
@@ -726,15 +741,50 @@ function sbbcrawlerDetect($userAgent)
         'Ezine',
         'ScoutJet',
         'ShopWiki',
+        'Google-analytics.com',
+        'windows nt',
+        'yahoo',
+        'live',
         'Tripadvisor');
 
     for ($i = 0; $i < count($agentsok); $i++) {
-        $foundit = strpos($userAgent, strtolower($agentsok[$i]));
+        $foundit = stripos($userAgent, $agentsok[$i]);
         if ($foundit !== false)
             return false;
     }
 
  
+ 
+        // Bloqueia alguns nicknames
+        $anickko = array(
+            'silk',
+            'LCC',
+            'BLA',
+            'SiteUptime.com',
+            'Galaxy',
+            'FDM');
+
+        for ($i = 0; $i < count($anickko); $i++) {
+            $foundit = stripos($sbb_found, $anickko[$i]);
+            if ($foundit !== false)
+                return false;
+        }
+        
+
+    
+      //Especificos
+      $auako2 = array(
+            'Ant',
+            '2ip',
+            'AHC',
+            'git');
+
+      for ($i = 0; $i < count($auako2); $i++) {
+            if (trim($sbb_found) == trim($auako2[$i]))
+                return false;
+      }
+        
+    
     $nickname = (string )time();
 
     $myarray = array(
@@ -743,7 +793,8 @@ function sbbcrawlerDetect($userAgent)
     'nickname' => $nickname,
     'version' => STOPBADBOTSVERSION,
     );
-    
+
+            
     
     if(empty($userAgentOri) or empty($stopbadbotsip) or empty($nickname) )
       return false;
