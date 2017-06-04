@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<?php wp_head(); ?>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -11,15 +11,21 @@
 	<header class="site-header" role="banner">
 
 		<div class="hero-zone-featured-image">
-			<?php
-				if( is_single() ):
-			?>
+			<?php if( !is_front_page() && !is_search() && !is_404() ): ?>
 				<a href="<?php the_permalink(); ?>">
 					<?php the_post_thumbnail(the_ID(), 'flexiauto-single-image', array('alt' => 'hero-image')); ?>
 				</a>
+			<?php elseif( is_search() ): ?>
+					<a class="search" href="<?php the_permalink(); ?>">
+						<img src="<?php print TPL_DIR ?>/assets/images/coffee.jpg" alt="Search page">
+					</a>
+			<?php elseif( is_404()  ): ?>
+					<a class="error" href="<?php the_permalink(); ?>">
+						<img src="<?php print TPL_DIR ?>/assets/images/error.jpg" alt="Error page">
+					</a>
 			<?php else: ?>
 				<a href="<?php the_permalink(); ?>">
-					<img src="<?php print TPL_DIR ?>/assets/images/header.jpg" alt="Illustration">
+					<img src="<?php print TPL_DIR ?>/assets/images/header.jpg" alt="Global header">
 				</a>
 			<?php endif; ?>
 		</div>
@@ -50,15 +56,17 @@
 					'menu_class'     => 'menu clearfix',
 				) ); ?>
 				<span class="open-search desktop-only"></span>
-				<div class="lang-menu">
+				<div class="lang-menu desktop-only">
 					<?php dynamic_sidebar('language');?>
 				</div>
 			</nav>
 		</div>
 
-		<div class="single-page-title">
-			<h1 class="page-title"><?php the_title(); ?></h1>
-		</div>
+		<?php if( is_page() && !is_page_template('search.php') ): ?>
+			<div class="single-page-title">
+				<h1 class="page-title"><?php the_title(); ?></h1>
+			</div>
+		<?php endif; ?>
 
 		<?php if( is_search()): ?>
 			<div class="single-page-title">
@@ -67,7 +75,7 @@
 		<?php endif; ?>
 
 		<div class="fixed-links">
-			<?php if ( has_nav_menu( 'links' ) ) : ?>
+			<?php if ( has_nav_menu( 'quicklinks' ) ) : ?>
 				<nav class="quicklinks-navigation" role="navigation">
 					<?php
 						wp_nav_menu( array(

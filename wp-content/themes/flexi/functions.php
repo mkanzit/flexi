@@ -37,7 +37,7 @@
 			'top'    => __( 'Top Menu', 'flexiauto' ),
 			'bottom'    => __( 'Bottom Menu', 'flexiauto' ),
 			'findus' => __( 'Find us Menu', 'flexiauto' ),
-			'links' => __( 'Bottom links Menu', 'flexiauto' ),
+			// 'links' => __( 'Bottom links Menu', 'flexiauto' ),
 			'quicklinks' => __( 'Quick links Menu', 'flexiauto' ),
 			'languges' => __( 'Languages Menu', 'flexiauto' ),
 		) );
@@ -100,6 +100,7 @@
 		wp_enqueue_script('bootstrap-scripts', TPL_DIR . '/assets/js/vendor/bootstrap.min.js', array(), false, true);
 		wp_enqueue_script('nicescroll', TPL_DIR . '/assets/js/vendor/jquery.nicescroll.min.js', array(), false, true);
 		wp_enqueue_script('jquery-validate', TPL_DIR . '/assets/js/vendor/jquery.validate.min.js', array(), false, true);
+		wp_enqueue_script('match-height', TPL_DIR . '/assets/js/vendor/jquery.matchHeight.min.js', array(), false, true);
 		wp_enqueue_script('flexi-scripts', TPL_DIR . '/assets/js/flexi.min.js', array(), false, true);
 
 	}

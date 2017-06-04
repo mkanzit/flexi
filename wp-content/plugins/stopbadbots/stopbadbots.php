@@ -2,8 +2,8 @@
 /*
 Plugin Name: StopBadBots 
 Plugin URI: http://stopbadbots.com
-Description: The easiest way to stop bad bots.
-Version: 3.4
+Description: The easiest way to stop bad bots and spiders.
+Version: 3.5
 Text Domain: stopbadbots
 Domain Path: /language
 Author: Bill Minozzi
@@ -36,7 +36,7 @@ if (!defined('ABSPATH'))
 
  // ob_start();
     
-define('STOPBADBOTSVERSION', '3.4' );
+define('STOPBADBOTSVERSION', '3.5' );
 define('STOPBADBOTSPATH', plugin_dir_path(__file__) );
 define('STOPBADBOTSURL', plugin_dir_url(__file__));
 define('STOPBADBOTSDOMAIN', get_site_url() );
@@ -147,10 +147,13 @@ register_activation_hook( __FILE__, 'sbb_plugin_was_activated');
 if($stopbadbots_version < STOPBADBOTSVERSION)
 { 
     
-   sbb_create_db();
-   sbb_upgrade_db();
-   check_db_sbb_blacklist();
-   sbb_fill_db_froma();
+   if($stopbadbots_version < '3.4')
+   {
+       sbb_create_db();
+       sbb_upgrade_db();
+       check_db_sbb_blacklist();
+       sbb_fill_db_froma();
+   }
    
    //Default yes
    if(get_option('stop_bad_bots_network','') == '')

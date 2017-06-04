@@ -3,7 +3,7 @@
 
 <div id="primary" class="content-area enterprise">
 	<main id="main" class="site-main" role="main">
-    <div class="container">
+    <div class="container normal-content">
 
       <section id="portrait" class="block-page-section block-spaced">
         <div class="container">

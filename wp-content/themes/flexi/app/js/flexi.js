@@ -4,12 +4,10 @@
     /* Header Parallax */
     var navHeader  = $('.site-header .header-top');
     var lastScroll = 0;
+    var viewport   = $(page).width();
 
-    $(window).on('load resize orientationchange', function(){
-      var viewport = $(this).width();
-
-      if( viewport > 1024 ){
-        $(page).scroll(function(){
+    if( viewport > 1024 ){
+      $(page).scroll(function(){
         var pageScroll = $(this).scrollTop();
 
         if (pageScroll > lastScroll){
@@ -19,8 +17,7 @@
         }
         lastScroll = pageScroll;
       });
-      }
-    });
+    }
 
     /* Search form */
     var searchArea = $('.search-area');
@@ -36,44 +33,43 @@
       searchArea.find('.search-field').val('');
     });
 
-    $('.main-navigation .menu-top-menu-container .menu')
+
+    /* Languages menu */
+    $('.main-navigation > [class$="-container"] .menu')
       .append( $('.main-navigation .open-search') );
 
-    $('.main-navigation .menu-top-menu-container .menu')
+    $('.main-navigation > [class$="-container"] .menu')
       .append( $('.main-navigation .lang-menu') );
 
 
     /* Burger menu */
     var hamburger = $('.hamburger');
     var menu      = $('.main-navigation');
-    var menuItems = menu.find('.menu-top-menu-container > .menu > .menu-item');
+    var menuItems = menu.find('.menu > .menu-item');
+    var resolution= $(this).width();
 
     hamburger.click(function(){
       $(this).toggleClass('clicked');
       menu.slideToggle();
     });
 
-    $(window).on('load resize orientationchange', function(){
-      var viewport = $(this).width();
 
-      if( viewport < 768 ) {
-        menuItems.click(function(e){
-          var _self = $(this);
+    if( resolution < 768 ) {
+      $('.menu-item-has-children > a').click(function(e){
+        e.preventDefault();
+      });
 
-          if( _self.hasClass('menu-item-has-children') ) {
-            e.preventDefault();
-          }
+      menuItems.click(function(e){
+        var _self = $(this);
 
-          _self.find('.sub-menu').slideToggle(200);
-          _self.siblings().find('.sub-menu').slideUp(200);
+        _self.find('.sub-menu').slideToggle(200);
+        _self.siblings().find('.sub-menu').slideUp(200);
 
-          setTimeout(function(){
-            $('html,body').stop().animate({scrollTop: _self.offset().top},500);
-          }, 300);
-        });
-      }
-    });
-
+        setTimeout(function(){
+          $('html,body').stop().animate({scrollTop: _self.offset().top},500);
+        }, 300);
+      });
+    }
 
 
     /* scrollTop */
@@ -85,8 +81,7 @@
     }
 
     /* Nicescroll */
-    var scrollable = $('.product-gallery-container');
-    scrollable.niceScroll();
+    $('.gallery-container').niceScroll();
 
 
     /* Form validation */
@@ -118,5 +113,8 @@
       validClass: 'valid',
       messages: {}
     });
+
+    /* Gellery Match Height */
+    $('.gallery-container .block-teaser').matchHeight();
   });
 })(jQuery, window);

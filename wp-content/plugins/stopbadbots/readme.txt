@@ -4,16 +4,16 @@ Donate link: http://stopbadbots.com/donate/
 Tags: block bot, block bots, block bad bots, stop bot, stop bots, bot, bots, bad, stop bad bots
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 3.4
+Stable tag: 3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-The easiest way to block bad bots. Blocks more than 2560 bad bots with one click! No .htaccess neither robots.txt required.
+The easiest way to block bad bots and spiders. Blocks more than 2560 bad bots and spiders with one click! No .htaccess neither robots.txt required.
 
 == Description ==
 
-The Stop Bad Bots Plugin is the easiest way to stop Bad Bots.
+The Stop Bad Bots Plugin is the easiest way to stop Bad Bots and spiders.
 
 Bad bots consume bandwidth, slow down your server, steal your content and look for vulnerability to compromise your server. 
 
@@ -107,6 +107,8 @@ Where is the demo video?
 2. Default Bot Table
 
 == Changelog ==
+3.5 2017-06-01 -  Add Memory Diagnose Tab.
+
 3.4 2017-05-30 -  Improved memory usage and replaced around 300 inactive bots with new actives.
 
 3.3 2017-05-05 -  Help text Improvements.

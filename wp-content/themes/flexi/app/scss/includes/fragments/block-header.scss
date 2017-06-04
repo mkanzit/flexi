@@ -1,6 +1,26 @@
 .site-header {
 
-  .hero-zone-featured-image { font-size: 0; }
+  @media #{$tablet} {
+    position: relative;
+  }
+
+  .hero-zone-featured-image {
+    font-size: 0;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+
+      @media #{$phone} {
+        height: 400px;
+        left: 50%;
+        max-width: none;
+        position: relative;
+        transform: translate(-50%, 0);
+        width: auto;
+      }
+    }
+  }
 
   .header-top {
     left: 0;
@@ -35,7 +55,8 @@
     .site-branding {
       background: $skin-white;
       box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-      padding: 3.4rem 0;
+      height: 145px;
+      padding: 1.4rem 0;
       position: relative;
       text-align: right;
       width: 21%;
@@ -55,18 +76,16 @@
         width: 0;
       }
 
-      @media screen and (max-width: 1100px) {
-        width: 150px;
-      }
+      img { height: 100%; }
 
       @media #{$tablet} {
         box-shadow: none;
+        height: 80px;
+        min-width: 96px;
         padding: 1rem;
         text-align: left;
 
         &::after { display: none; }
-
-        img { height: 50px; }
       }
     }
 
@@ -199,6 +218,11 @@
         }
       }
 
+      > .open-search,
+      > .lang-menu {
+        display: none;
+      }
+
       @media screen and (max-width: 1100px) {
         width: 79%;
       }
@@ -255,12 +279,37 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
+
 
     .page-title {
       font-size: 48px;
       color: $skin-white;
+      text-align: center;
       text-transform: uppercase;
+
+      @media #{$tablet} {
+        font-size: 36px;
+      }
+
+      @media #{$phone} {
+        font-size: 24px;
+      }
+    }
+
+    .accroch {
+      color: $skin-white;
+      text-align: center;
+    }
+
+
+    @media #{$phone} {
+      text-align: center;
+      width: 80%;
+
+      .page-title {
+        font-size: 36px;
+      }
     }
   }
 
@@ -338,28 +387,20 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+      width: 40%;
 
       @media #{$tablet} {
         width: 60%;
       }
 
-      .form-item,
-      .form-action {
-        float: left;
+      @media #{$phone} {
+        width: 100%;
       }
 
+
       .form-item {
-        margin-right: 3px;
-
         .search-field {
-          width: 300px;
-        }
-
-        @media #{$phone} {
-          margin-right: 0;
           width: 100%;
-
-          .search-field { width: 100%; }
         }
       }
 

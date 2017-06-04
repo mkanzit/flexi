@@ -1,0 +1,32 @@
+.search-results {
+
+  .search-form {
+    width: 40%;
+
+    @media #{$tablet} {
+      width: 60%;
+    }
+
+    @media #{$phone} {
+      width: 100%;
+    }
+  }
+
+  ol {
+    list-style: decimal;
+    list-style-position: inside;
+  }
+
+  .result-item,
+  .result-item a {
+    font-size: 20px;
+    color: $skin-link-color;
+  }
+
+  .result-item {
+    .block-title {
+      display: inline-block;
+      margin: 10px 0;
+    }
+  }
+}

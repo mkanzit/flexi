@@ -19,35 +19,20 @@
 						?>
 						<hr>
 						<?php if ( has_nav_menu( 'findus' ) ) : ?>
-							<nav class="footer-navigation" role="navigation">
+							<nav class="footer-navigation find-us-menu row" role="navigation">
+								<div class="copyrights col-md-4 col-xs-12"><?php _e('Copyright', 'flexiauto'); ?> <?php print date('Y') ?> @ Flexi AUTO</div>
 								<?php
 									wp_nav_menu( array(
 										'theme_location' => 'findus',
 										'menu_id'        => 'footer-menu',
 										'menu_class'     => 'menu menu-contact clearfix',
+										'container_class'=> 'menu-contactus-container col-md-8 col-sm-12'
 									) );
 								?>
 							</nav><!-- .social-navigation -->
 						<?php endif; ?>
 					</div>
 				</div><!-- .container -->
-			</div>
-			<div class="footer-links">
-				<div class="container">
-					<div class="row">
-						<?php if ( has_nav_menu( 'links' ) ) : ?>
-							<nav class="footer-navigation" role="navigation">
-								<?php
-									wp_nav_menu( array(
-										'theme_location' => 'links',
-										'menu_id'        => 'footer-legal',
-										'menu_class'     => 'menu menu-legal clearfix',
-									) );
-								?>
-							</nav><!-- .social-navigation -->
-						<?php endif; ?>
-					</div>
-				</div>
 			</div>
 
 			<?php if(get_field('notice')): ?>

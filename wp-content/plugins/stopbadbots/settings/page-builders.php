@@ -293,7 +293,7 @@ class OptionPageBuilderTabbed extends OptionPageBuilder {
 		do_settings_sections( $this->page->slug );
 
         
-       if($active_tab_id <> 'startup_guide' and $active_tab_id <> 'my_black_list' )
+       if($active_tab_id <> 'startup_guide' and $active_tab_id <> 'my_black_list' and $active_tab_id <> 'memory_checkup' )
 	 	submit_button();
 
 		echo '</form>';

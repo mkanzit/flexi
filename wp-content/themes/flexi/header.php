@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<?php wp_head(); ?>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -48,17 +48,22 @@
 					'menu_class'     => 'menu clearfix',
 				) ); ?>
 				<span class="open-search desktop-only"></span>
-				<div class="lang-menu">
+				<div class="lang-menu desktop-only">
 					<?php dynamic_sidebar('language');?>
 				</div>
 			</nav>
 		</div>
 
-		<?php if( is_single() && !is_front_page() && !is_search()): ?>
-			<div class="single-page-title">
+		<div class="single-page-title">
+			<?php if(is_front_page()): ?>
+				<h1 class="page-title"><?php print get_option('blogname'); ?></h1>
+			<?php else: ?>
 				<h1 class="page-title"><?php the_title(); ?></h1>
+			<?php endif; ?>
+			<div class="accroch">
+				<?php the_field('texte_accroch'); ?>
 			</div>
-		<?php endif; ?>
+		</div>
 
 		<?php if( is_search()): ?>
 			<div class="single-page-title">
@@ -67,7 +72,7 @@
 		<?php endif; ?>
 
 		<div class="fixed-links">
-			<?php if ( has_nav_menu( 'links' ) ) : ?>
+			<?php if ( has_nav_menu( 'quicklinks' ) ) : ?>
 				<nav class="quicklinks-navigation" role="navigation">
 					<?php
 						wp_nav_menu( array(

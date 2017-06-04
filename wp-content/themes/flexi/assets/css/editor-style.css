@@ -278,11 +278,12 @@ tr {
 	border-bottom: 1px solid #eee;
 }
 
-td {
-	padding: 0.4em;
+td, th {
+	border: 1px solid #000;
+	padding: 10px;
 }
 
-th:first-child,
+/*th:first-child,
 td:first-child {
 	padding-left: 0;
 }
@@ -290,7 +291,7 @@ td:first-child {
 th:last-child,
 td:last-child {
 	padding-right: 0;
-}
+}*/
 
 a {
 	color: #cc0b10;

@@ -136,4 +136,15 @@ $settings['Notifications Settings'][__('Notifications')]['fields'] = $fields;
 
 
 
+require_once (STOPBADBOTSPATH. "guide/memory.php");
+
+
+$settings['Memory Checkup'][__('Memory Checkup')] = array('info' => $sbb_memory );
+$fields = array();   
+
+        
+$settings['Memory Checkup'][__('Memory Checkup')]['fields'] = $fields;
+
+
+
 new OptionPageBuilderTabbed($mypage, $settings);

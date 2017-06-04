@@ -179,8 +179,10 @@ function sbb_fill_db_froma()
              else
                  $botflag = '3';
                  
-            
-             $results9 = $wpdb->get_results("SELECT * FROM $table_name where botnickname = '$botnickname' limit 1");
+             $query = "SELECT * FROM ".$table_name. " where botnickname = '".$botnickname."' limit 1";
+             
+             $results9 = $wpdb->get_results($query);           
+             
              if (count($results9) > 0 or empty($botnickname))
                 continue;    
 
